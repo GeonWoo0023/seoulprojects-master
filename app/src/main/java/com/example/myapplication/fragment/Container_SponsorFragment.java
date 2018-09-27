@@ -1,33 +1,80 @@
 package com.example.myapplication.fragment;
 
-
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myapplication.JSONTaskAndParsor;
 import com.example.myapplication.R;
+import com.example.myapplication.adapter.SponAdapter;
+import com.example.myapplication.bin.SponsorBoardBin;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import java.util.ArrayList;
+
+
 public class Container_SponsorFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private SponAdapter adapter;
+    ArrayList<SponsorBoardBin> sponsorBoardBins;
 
 
     public Container_SponsorFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+
     public static Container_SponsorFragment newInstance() {
         Container_SponsorFragment fragment = new Container_SponsorFragment();
         return fragment;
     }
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_container__sponsor, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View mLayout = inflater.inflate(R.layout.fragment_container__sponsor, container, false);
+
+        sponsorBoardBins = new ArrayList<SponsorBoardBin> ();
+        JSONTaskAndParsor jsonTaskAndParsor = new JSONTaskAndParsor(sponsorBoardBins,null);
+        jsonTaskAndParsor.execute(JSONTaskAndParsor.INFOBOARD_ALL_URL);
+
+
+        recyclerView = (RecyclerView)mLayout.findViewById(R.id.spon_container_recycler);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(),
+                2, GridLayoutManager.VERTICAL, false));
+        recyclerView.setHasFixedSize(true);
+
+       /* layoutManager = new LinearLayoutManager(this.getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        recyclerView.setLayoutManager(layoutManager);*/
+
+        adapter = new SponAdapter(R.layout.spon_recycle_item);
+        recyclerView.setAdapter(adapter);
+
+
+
+        return mLayout;
     }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
 
 }

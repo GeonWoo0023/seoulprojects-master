@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class Container_infoFragment extends Fragment {
 
 
