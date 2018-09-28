@@ -18,16 +18,17 @@ public class SponAdapter extends RecyclerView.Adapter<SponAdapter.ViewHolder> {
 
     public SponAdapter(int layoutID) {
         bin = new SponsorBoardBin();
-        bin.setTitle("test01");
-        bin.setContent("test01 content");
+        bin.setTitle("글제목(ex 긱스튜디오팀임돠 bla~bla)");
+        bin.setContent("내용(ex 장소 후원받고싶어유 우린 앱개발하는 팀이구요bla~bla)");
         bin.setSthumbnail_uri("https://t1.daumcdn.net/cfile/tistory/23071B425700664239");
+        bin.setWriter("긱스튜디오");
         this.spon_cardview = layoutID;
 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView thumbnail;
-        TextView title, content;
+        TextView title, content,writer;
 
 
         public ViewHolder(View itemView) {
@@ -35,6 +36,7 @@ public class SponAdapter extends RecyclerView.Adapter<SponAdapter.ViewHolder> {
             thumbnail = itemView.findViewById(R.id.spon_item_card_image);
             title = itemView.findViewById(R.id.spon_item_tv1);
             content = itemView.findViewById(R.id.spon_item_tv2);
+            writer = itemView.findViewById(R.id.spon_item_writer);
 
         }
     }
@@ -51,13 +53,14 @@ public class SponAdapter extends RecyclerView.Adapter<SponAdapter.ViewHolder> {
         holder.title.setText(bin.getTitle());
         holder.content.setText(bin.getContent());
         holder.thumbnail.setImageResource(R.drawable.ic_launcher_background);
-        Log.i("asd",bin.getTitle());
+        holder.writer.setText(bin.getWriter());
+        //Log.i("asd",bin.getTitle());
 
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 5;
 
     }
 

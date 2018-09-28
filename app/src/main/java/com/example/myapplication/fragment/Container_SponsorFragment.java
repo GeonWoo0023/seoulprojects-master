@@ -1,16 +1,21 @@
 package com.example.myapplication.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.myapplication.JSONTaskAndParsor;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.adapter.SponAdapter;
 import com.example.myapplication.bin.SponsorBoardBin;
@@ -22,6 +27,7 @@ public class Container_SponsorFragment extends Fragment {
     private RecyclerView recyclerView;
     private SponAdapter adapter;
     ArrayList<SponsorBoardBin> sponsorBoardBins;
+    public Button spon_enroll;
 
 
     public Container_SponsorFragment() {
@@ -42,7 +48,7 @@ public class Container_SponsorFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
         View mLayout = inflater.inflate(R.layout.fragment_container__sponsor, container, false);
 
@@ -53,7 +59,7 @@ public class Container_SponsorFragment extends Fragment {
 
         recyclerView = (RecyclerView)mLayout.findViewById(R.id.spon_container_recycler);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),
-                2, GridLayoutManager.VERTICAL, false));
+                1, GridLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
 
        /* layoutManager = new LinearLayoutManager(this.getContext());
@@ -65,9 +71,21 @@ public class Container_SponsorFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
+        spon_enroll = (Button)mLayout.findViewById(R.id.spon_enrollment);
+
+        spon_enroll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),SponEnrollment.class);
+                startActivity(intent);
+
+
+            }
+        });
 
         return mLayout;
     }
+
 
 
     @Override

@@ -86,6 +86,7 @@ public class MainFragment extends Fragment implements BottomNavigationView.OnNav
                 frag = Container_infoFragment.newInstance();
                 //Toast.makeText(getContext(),"내정보",Toast.LENGTH_SHORT).show();
                 break;
+
         }
 
         if (frag != null) {
